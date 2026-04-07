@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
@@ -14,7 +15,7 @@ const posts = (await getCollection('blog')).sort(
 
   <hr />
 
-  <nav>
+  <nav aria-label="Site links">
     <ul style="list-style: none; padding: 0;">
       <li><a href="/blog/">~/blog</a></li>
       <li><a href="https://github.com/gyndav" target="_blank" rel="noopener">~/github</a></li>
@@ -23,22 +24,11 @@ const posts = (await getCollection('blog')).sort(
   </nav>
 
   {posts.length > 0 && (
-    <>
+    <section>
       <hr />
-      <section>
-        <h2 style="margin-top: 0;">latest</h2>
-        <ul style="list-style: none; padding: 0;">
-          {posts.map(post => (
-            <li style="display: flex; gap: 1.5rem; align-items: baseline; margin: 0.4rem 0;">
-              <span class="muted" style="font-size: 0.85rem; flex-shrink: 0;">
-                {post.data.date.toISOString().slice(0, 10)}
-              </span>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
+      <h2 style="margin-top: 0;">latest</h2>
+      <PostList posts={posts} />
+    </section>
   )}
 
   <script type="application/ld+json" set:html={JSON.stringify({

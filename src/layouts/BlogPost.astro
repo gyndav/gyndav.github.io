@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import { formatDate } from '../utils/date';
 
 interface Props {
   title: string;
@@ -7,17 +8,16 @@ interface Props {
   description?: string;
 }
 const { title, date, description } = Astro.props;
-const formatted = date.toISOString().slice(0, 10);
 ---
 <Base title={title} description={description}>
-  <nav style="margin-bottom: 2.5rem;">
+  <nav aria-label="Breadcrumb" style="margin-bottom: 2.5rem;">
     <a href="/">~/</a> <span class="muted">/</span> <a href="/blog/">blog</a>
   </nav>
 
   <article>
     <header style="margin-bottom: 2rem;">
       <h1>{title}</h1>
-      <p class="muted" style="margin-top: 0.35rem; font-size: 0.85rem;">{formatted}</p>
+      <p class="muted" style="margin-top: 0.35rem; font-size: 0.85rem;">{formatDate(date)}</p>
     </header>
     <slot />
   </article>
