@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<Base title="Blog — David Guyon">
+  <nav aria-label="Breadcrumb" style="margin-bottom: 2.5rem;">
+    <a href="/">~/</a> <span class="muted">/</span> blog
+  </nav>
+
+  <h1>Blog</h1>
+
+  <div style="margin-top: 1.5rem;">
+    <PostList posts={posts} />
+  </div>
+</Base>

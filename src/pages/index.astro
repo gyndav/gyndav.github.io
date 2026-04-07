@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<Base title="David Guyon">
+  <header>
+    <h1>David Guyon</h1>
+    <p class="muted" style="margin-top: 0.25rem;">Engineer — Code &amp; Infrastructure</p>
+  </header>
+
+  <hr />
+
+  <nav aria-label="Site links">
+    <ul style="list-style: none; padding: 0;">
+      <li><a href="/blog/">~/blog</a></li>
+      <li><a href="https://github.com/gyndav" target="_blank" rel="noopener">~/github</a></li>
+      <li><a href="https://www.linkedin.com/in/gyndav" target="_blank" rel="noopener">~/linkedin</a></li>
+    </ul>
+  </nav>
+
+  {posts.length > 0 && (
+    <section>
+      <hr />
+      <h2 style="margin-top: 0;">latest</h2>
+      <PostList posts={posts} />
+    </section>
+  )}
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "David Guyon",
+    "url": "https://gyndav.github.io",
+    "sameAs": [
+      "https://github.com/gyndav",
+      "https://www.linkedin.com/in/gyndav"
+    ]
+  })} />
+</Base>

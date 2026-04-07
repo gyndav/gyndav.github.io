@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'David Guyon — Engineer' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="David Guyon" />
+  <link rel="canonical" href={Astro.url.href} />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --fg: #d4d4d4;
+      --muted: #737373;
+      --accent: #22c55e;
+      --border: #262626;
+      --code-bg: #141414;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'GeistMono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    h1 { font-size: 1.25rem; font-weight: 600; color: #fff; }
+    h2 { font-size: 1rem; font-weight: 600; color: #fff; margin: 2rem 0 0.75rem; }
+
+    p { margin: 0.75rem 0; }
+
+    ul { padding-left: 1.25rem; }
+    li { margin: 0.25rem 0; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.1em 0.35em;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+    }
+
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>
