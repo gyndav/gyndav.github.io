@@ -2,5 +2,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://gyndav.pages.dev',
+  site: 'https://gyndav.workers.dev',
 });
